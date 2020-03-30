@@ -30,7 +30,8 @@ app.get('/articles/:id', (req, res, next)=>{
     })
 });
 
-// curl --data "url=http://www.baidu.com" http://localhost:3000/articles
+// curl -d "url=http://www.baidu.com" http://localhost:3000/articles
+// curl -d "url=http://www.baidu.com&id=0" http://localhost:3000/articles
 app.post('/articles', (req, res, next)=>{
     /* articles.push(article);
     res.send(article); */
