@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start":"npm run babel && npm run uglify",
-    "babel": "./node_modules/.bin/babel browser.js -d build/",
+    "start": "npm run babel && npm run uglify",
+    "babel": "./node_modules/.bin/babel browser.js --out-dir build/",
     "uglify": "./node_modules/.bin/uglifyjs build/browser.js -o build/browser.min.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -14,8 +14,9 @@
   "license": "ISC",
   "dependencies": {},
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
     "uglify-es": "^3.3.9"
   }
 }
