@@ -4,6 +4,8 @@ const sourcemaps = require('gulp-sourcemaps');
 const babel = require('gulp-babel');
 const concat = require('gulp-concat');
 
+const watch = require('gulp-watch');
+
 gulp.task('default', ()=>{
     // 使用gulp自带的文件聚集工具gulp.src查找所有的React jsx文件
     return gulp.src('app/*.jsx')
@@ -22,4 +24,8 @@ gulp.task('default', ()=>{
         // 将所有文件放到dist目录下
         .pipe(gulp.dest('dist'));
 
-})
+});
+
+gulp.task('watch', ()=>{
+    watch('app/**.jsx', gulp.series('default'));
+});
