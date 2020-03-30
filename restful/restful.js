@@ -12,6 +12,7 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
+// curl http://localhost:3000/articles 
 app.get('/articles', (req, res, next)=>{
     Article.all((err, articles)=>{
         if(err) return next(err);
@@ -19,6 +20,7 @@ app.get('/articles', (req, res, next)=>{
     });
 });
 
+// curl http://localhost:3000/articles/0
 app.get('/articles/:id', (req, res, next)=>{
     const id = req.params.id;
     console.log('Fetching:', id);
@@ -28,6 +30,7 @@ app.get('/articles/:id', (req, res, next)=>{
     })
 });
 
+// curl --data "url=http://www.baidu.com" http://localhost:3000/articles
 app.post('/articles', (req, res, next)=>{
     /* articles.push(article);
     res.send(article); */
@@ -50,6 +53,7 @@ app.post('/articles', (req, res, next)=>{
 });
 /*
  * 自上而下匹配路由 
+ * curl -X DELETE http://localhost:3000/articles/clear
  */
 app.delete('/articles/clear', (req, res, next)=>{
     Article.clear((err)=>{
@@ -57,7 +61,7 @@ app.delete('/articles/clear', (req, res, next)=>{
         res.send({message: 'All Deleted'});
     });
 });
-
+// curl -X DELETE http://localhost:3000/articles/0
 app.delete('/articles/:id', (req, res, next)=>{
     const id = req.params.id;
     console.log('Deleting:', id);
