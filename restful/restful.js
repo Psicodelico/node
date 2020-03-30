@@ -3,6 +3,7 @@ const app = express();
 // const articles = [{title: 'Example'}];
 const bodyParser = require('body-parser');
 const Article = require('./db').Article;
+const read = require('node-readability');
 
 app.set('port', process.env.PORT || 3000);
 
@@ -28,12 +29,32 @@ app.get('/articles/:id', (req, res, next)=>{
 });
 
 app.post('/articles', (req, res, next)=>{
-    const article = { title: req.body.title };
     /* articles.push(article);
     res.send(article); */
+    /* const article = { title: req.body.title };
     Article.create(article, (err, article)=>{
         if(err) return next(err);
         res.send('OK');
+    }); */
+    const url = req.body.url;
+    read(url, (err, result)=>{
+        if(err || !result) res.status(500).send('Error downloading article');
+        Article.create({
+            title: result.title,
+            content: result.content
+        }, (err, article)=>{
+            if(err) return next(err);
+            res.send('OK');
+        });
+    });
+});
+/*
+ * 自上而下匹配路由 
+ */
+app.delete('/articles/clear', (req, res, next)=>{
+    Article.clear((err)=>{
+        if(err) return next(err);
+        res.send({message: 'All Deleted'});
     });
 });
 
@@ -43,7 +64,7 @@ app.delete('/articles/:id', (req, res, next)=>{
     Article.delete(id, (err)=>{
         if(err) return next(err);
         res.send({message: 'Deleted'});
-    })
+    });
     /* delete articles[id];
     res.send({ message: 'Deleted'}); */
 });

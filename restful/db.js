@@ -28,6 +28,10 @@ class Article{
         if(!id) return cb(new Error('需提供id'));
         db.run('DELETE FROM articles WHERE id = ?', id, cb);
     }
+
+    static clear(cb){
+        db.run('DELETE FROM articles', cb);
+    }
 }
 
 module.exports = db;
