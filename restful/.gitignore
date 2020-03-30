@@ -1,4 +1,4 @@
 /node_modules
 package-lock.json
-G.sqlite
+rest.sqlite
 yarn.lock

@@ -1,5 +1,5 @@
 const sqlite3 = require('sqlite3').verbose();
-const dbName = 'G.sqlite';
+const dbName = 'rest.sqlite';
 const db = new sqlite3.Database(dbName);
 
 db.serialize(()=>{

@@ -20,7 +20,7 @@ app.get('/articles', (req, res, next)=>{
     });
 });
 
-// curl http://localhost:3000/articles/0
+// curl http://localhost:3000/articles/1
 app.get('/articles/:id', (req, res, next)=>{
     const id = req.params.id;
     console.log('Fetching:', id);
@@ -62,7 +62,7 @@ app.delete('/articles/clear', (req, res, next)=>{
         res.send({message: 'All Deleted'});
     });
 });
-// curl -X DELETE http://localhost:3000/articles/0
+// curl -X DELETE http://localhost:3000/articles/1
 app.delete('/articles/:id', (req, res, next)=>{
     const id = req.params.id;
     console.log('Deleting:', id);
